@@ -11,17 +11,18 @@ class SongFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition():array
     {
         return [
             'cover_image' => $this->faker->imageUrl(640, 480, 'cats'),
-            'title' => $this->faker->sentence(3),
+            'title' => $this->faker->sentence(),
             'artists' => $this->faker->name(),
             'writers' => $this->faker->name(),
             'languages' => $this->faker->languageCode(),
             'release_date' => $this->faker->date(),
             'lyrics' => $this->faker->text(),
             'duration' => $this->faker->numberBetween(180, 600),
+            'song_path' => $this->faker->name()
         ];
     }
 }

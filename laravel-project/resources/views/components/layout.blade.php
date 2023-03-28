@@ -104,7 +104,7 @@
         function playSong(url, startTime = 0) {
             var audio = document.getElementById('audio-player');
             console.log(audio.currentTime);
-            if (audio.src === "http://127.0.0.1:8000" + url) {
+            if (audio.src === url) {
                 // If the same song is already playing
                 if (audio.paused) {
                     console.log('was paused');
@@ -165,7 +165,7 @@
                                     aria-expanded="false" data-dropdown-toggle="dropdown-user">
                                     <span class="sr-only">Open user menu</span>
                                     <img class="w-8 h-8 rounded-full"
-                                        src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                                        src="{{asset('images/profile.jpg')}}"
                                         alt="user photo">
                                 </button>
                             </div>

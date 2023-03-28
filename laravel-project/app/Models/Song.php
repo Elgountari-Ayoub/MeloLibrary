@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Song extends Model
 {
@@ -34,4 +35,14 @@ class Song extends Model
                 ->orWhere('duration', 'like', '%' . request('search') . '%');
         }
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'favorites');
+    }   
 }

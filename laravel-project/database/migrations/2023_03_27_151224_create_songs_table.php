@@ -16,6 +16,7 @@ class CreateSongsTable extends Migration
         Schema::create('songs', function (Blueprint $table) {
             $table->id();
             $table->string('cover_image')->nullable();
+            $table->string('song_path')->nullable();
             $table->string('title');
             $table->string('artists');
             $table->string('writers')->nullable();

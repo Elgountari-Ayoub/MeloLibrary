@@ -56,13 +56,16 @@
                                 </td> --}}
                                 <th scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <img onclick="playSong('/songs/al-fatiha.mp3')" src="{{ $song->cover_image }}"
-                                        alt="Song 1 Cover Image" class="h-16 w-16 m-auto object-cover rounded-lg">
+                                    <img onclick="playSong('{{ asset('storage/' . $song->song_path) }}')"
+                                        src="{{ asset('storage/' . $song->cover_image) }}" alt="Song 1 Cover Image"
+                                        class="h-16 w-16 m-auto object-cover rounded-lg">
                                     <audio controls loop hidden id="audio-player" />
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ $song->title }}
-
+                                    <a href="/songs/{{ $song->id }}"
+                                        class="text-gray-900 dark:text-white font-bold text-sm hover:text-indigo-500">
+                                        {{ $song->title }}
+                                    </a>
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $song->artists }}
@@ -87,13 +90,21 @@
                                     $remainingSeconds = $seconds % 60;
                                 @endphp
                                 <td class="px-6 py-4">
-                                    {{$minutes}}m{{$remainingSeconds}}s
+                                    {{ $minutes }}m{{ $remainingSeconds }}s
                                 </td>
-                                <td class="flex items-center px-6 py-4 space-x-3">
-                                    <a href="#"
+                                <td class="flex items-center px-6 py-8 space-x-3 ">
+                                    <a href="/songs/{{ $song->id }}/edite"
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    <a href="#"
-                                        class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</a>
+
+                                    <form method="POST" action="/songs/{{ $song->id }}"
+                                        class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="text-red-600">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                            Delete
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -101,7 +112,7 @@
                     </tbody>
                 </table>
             @else
-                <p>No listing found</p>
+                <p>No songs found</p>
             @endunless
         </div>
     </x-container>
